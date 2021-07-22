@@ -1,0 +1,23 @@
+{
+    "name": "perevertunoff/mytools-php",
+    "description": "My PHP tools",
+    "keywords": ["functions", "webhook", "bitrix24"],
+    "type": "library",
+    "license": "Apache-2.0",
+    "version": "dev",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Alexey Perevertunov",
+            "email": "perevertunoff@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Perevertunoff\\MyToolsPhp\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.2"
+    }
+}
