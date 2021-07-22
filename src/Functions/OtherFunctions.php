@@ -19,7 +19,7 @@ class OtherFunctions
                     }
                 }
             }
-            return self::returnTrueArray($result);
+            return ArrayFunctions::returnTrueArray($result);
         }
 
         return false;
