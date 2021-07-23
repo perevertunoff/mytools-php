@@ -77,7 +77,6 @@ class ArrayFunctions
         $keys_and_values = self::returnTrueArray($keys_and_values);
 
         if ($array && $keys_and_values) {
-            $result = [];
             foreach ($array as $item_key => $item_value) {
                 if ($item_value = self::returnTrueArray($item_value)) {
                     if (self::isArrayValueByKey($item_value, $keys_and_values, $all_matches)) {
@@ -91,7 +90,45 @@ class ArrayFunctions
                     }
                 }
             }
-            return self::returnTrueArray($result);
+            if (isset($result) && $result) return $result;
+        }
+
+        return false;
+    }
+
+    public static function returnArrayMirrored($array = null)
+    {
+        if ($array = self::returnTrueArray($array)) {
+            foreach ($array as $key => $value) {
+                $result[$value] = $key;
+            }
+            if (isset($result) && $result) return $result;
+        }
+
+        return false;
+    }
+
+    public static function returnArrayWithChangedKeys($array = null, $new_keys = null, bool $only_new_keys = false)
+    {
+        $array = self::returnTrueArray($array);
+        $new_keys = self::returnTrueArray($new_keys);
+
+        if ($array && $new_keys) {
+            foreach ($array as $key => $value) {
+                if (isset($new_keys[$key]) && $new_keys[$key]) {
+                    if ($only_new_keys) {
+                        $new_array[$new_keys[$key]] = $value;
+                    } else {
+                        $array[$new_keys[$key]] = $value;
+                        unset($array[$key]);
+                    }
+                }
+            }
+            if ($only_new_keys && isset($new_array) && $new_array) {
+                return $new_array;
+            } else if (!$only_new_keys && $array) {
+                return $array;
+            }
         }
 
         return false;
